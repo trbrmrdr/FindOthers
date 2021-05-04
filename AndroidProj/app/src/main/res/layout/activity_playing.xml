@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/playing_gradient">
+
+
+    <ImageView
+        android:id="@+id/test_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.4"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/game_screen" />
+
+    <LinearLayout
+        android:id="@+id/star_input"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.045">
+
+
+        <ImageButton
+            android:layout_width="@dimen/star_radius_2"
+            android:layout_height="@dimen/star_radius_2"
+            android:background="@drawable/star" />
+
+        <ImageButton
+            android:layout_width="@dimen/star_radius_2"
+            android:layout_height="@dimen/star_radius_2"
+            android:background="@drawable/star" />
+
+        <ImageButton
+            android:layout_width="@dimen/star_radius_2"
+            android:layout_height="@dimen/star_radius_2"
+            android:background="@drawable/star" />
+
+        <ImageButton
+            android:layout_width="@dimen/star_radius_2"
+            android:layout_height="@dimen/star_radius_2"
+            android:background="@drawable/star" />
+
+        <ImageButton
+            android:layout_width="@dimen/star_radius_2"
+            android:layout_height="@dimen/star_radius_2"
+            android:background="@drawable/star_gray" />
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="@dimen/bottom_btn_size"
+        android:layout_height="@dimen/bottom_btn_size"
+        android:background="@drawable/back_button"
+        android:onClick="Back"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.043"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <ImageButton
+        android:id="@+id/setting_btn"
+        android:layout_width="@dimen/bottom_btn_size"
+        android:layout_height="@dimen/bottom_btn_size"
+        android:background="@drawable/circle_btn"
+        android:onClick="GoSetting"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_gear"
+        android:alpha="0.5"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.978" />
+
+    <ImageButton
+        android:id="@+id/help_find"
+
+        android:layout_width="@dimen/bottom_btn_size_main"
+        android:layout_height="@dimen/bottom_btn_size_main"
+        android:background="@drawable/button_hint_bg"
+        android:onClick="Hint_active"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_hint"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.991" />
+
+    <Button
+        android:id="@+id/hint_notification"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/circle_btn_green"
+        android:clickable="false"
+        android:text="AD"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/help_find"
+        app:layout_constraintEnd_toEndOf="@+id/help_find"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/help_find"
+        app:layout_constraintTop_toTopOf="@+id/help_find"
+        app:layout_constraintVertical_bias="0.0"></Button>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:orientation="vertical"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <include
+            android:id="@+id/main_top_card"
+            layout="@layout/main_card" />
+
+
+        <include
+            android:id="@+id/main_bottom_card"
+            layout="@layout/main_card" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

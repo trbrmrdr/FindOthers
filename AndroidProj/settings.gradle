@@ -1,0 +1,8 @@
+
+include ':test'
+include ':app'
+
+
+//include ':circleimageview'
+//project(':circleimageview').projectDir = new File(rootDir, 'app/libs/CircleImageView-master/circleimageview/')
+rootProject.name = "S5 Differences"

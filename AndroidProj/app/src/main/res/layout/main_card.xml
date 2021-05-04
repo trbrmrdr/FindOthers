@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/PlayCard"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+
+    android:layout_marginLeft="@dimen/play_card_margin"
+    android:layout_marginRight="@dimen/play_card_margin"
+    android:layout_marginBottom="@dimen/play_card_margin_height"
+    android:background="@color/white"
+    android:clipChildren="true"
+    app:cardBackgroundColor="@color/white">
+
+
+    <androidx.cardview.widget.CardView
+        style="@style/PlayCard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/play_card_inner">
+
+        <com.jsibbold.zoomage.ZoomageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test_img"
+            app:zoomage_animateOnReset="false"
+            app:zoomage_autoCenter="true"
+            app:zoomage_autoResetMode="NEVER"
+            app:zoomage_restrictBounds="true"
+            app:zoomage_maxScale="1.6"
+            app:zoomage_minScale="1"
+
+            app:zoomage_translatable="true"
+            app:zoomage_zoomable="true" />
+    </androidx.cardview.widget.CardView>
+</androidx.cardview.widget.CardView>

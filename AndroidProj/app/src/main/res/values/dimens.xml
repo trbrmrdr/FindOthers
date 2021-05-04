@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="label_coins_width">168dp</dimen>
+    <dimen name="label_coins_height">40dp</dimen>
+    <dimen name="star_radius">44dp</dimen>
+    <dimen name="star_radius_2">32dp</dimen>
+    <dimen name="coin_width">43dp</dimen>
+    <dimen name="coin_height">47dp</dimen>
+    <dimen name="coin_btn_width">42dp</dimen>
+    <dimen name="coin_btn_height">42dp</dimen>
+    <dimen name="plus_size">14dp</dimen>
+    <dimen name="bottom_btn_size">42dp</dimen>
+    <dimen name="bottom_btn_size_main">60dp</dimen>
+    <dimen name="bottom_btn_size_ad">20dp</dimen>
+    <dimen name="play_card_radius">20dp</dimen>
+    <dimen name="play_card_margin">15dp</dimen>
+    <dimen name="play_card_margin_height">4.5dp</dimen>
+    <dimen name="play_card_elevation">1dp</dimen>
+    <dimen name="play_card_inner">5dp</dimen>
+    <dimen name="win_card_inner">10dp</dimen>
+    <dimen name="main_circle_radius">190dp</dimen>
+    <dimen name="main_circle_size">375dp</dimen>
+</resources>

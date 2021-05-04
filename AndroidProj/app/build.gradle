@@ -1,0 +1,81 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+
+
+//    apply plugin: 'com.google.gms.google-services'
+//    apply plugin: 'com.google.firebase.crashlytics'
+    id 'kotlin-android-extensions'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.trbr.s5differences"
+        minSdkVersion 24
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        resConfigs "en", "ru"
+
+//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        def formattedDate = new Date().format('dd.MM.yy~HH-mm')
+        archivesBaseName = "$applicationId-v$versionCode($versionName) - $formattedDate"
+
+//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables.useSupportLibrary = true
+//        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+//    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines"
+
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+//    implementation "androidx.cardview:cardview:1.0.0"
+//    implementation "androidx.recyclerview:recyclerview:1.1.0"
+
+
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+    implementation("com.squareup.okhttp3:logging-interceptor:4.8.0")
+
+    implementation "com.github.bumptech.glide:okhttp3-integration:4.5.0"
+    implementation 'androidx.preference:preference:1.1.1'
+
+//    implementation 'de.hdodenhof:circleimageview'
+
+
+}
