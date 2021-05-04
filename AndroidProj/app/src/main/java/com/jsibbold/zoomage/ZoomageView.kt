@@ -379,6 +379,7 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas ?: return
+        startValues ?: return
 
         matrix_tmp.set(imageMatrix)
         matrix_tmp.getValues(matrixValues)
@@ -388,6 +389,7 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
             val dst = floatArrayOf(it.x, it.y)
 //            val inverseMatrix = Matrix()
 //            imageMatrix.invert(inverseMatrix)
+//            startValues
             imageMatrix.mapPoints(dst)
 
 //            width
@@ -398,9 +400,26 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
                 40F, paint_r
             )
 
+            val tmp_matrix = FloatArray(9)
+            startValues!!.forEachIndexed { index, fl ->
+                tmp_matrix[index] = fl - matrixValues[index]
+            }
+
+
+            Matrix().apply {
+                setValues(tmp_matrix)
+            }.mapPoints(dst)
+
             canvas.drawCircle(
-                matrixValues[Matrix.MTRANS_X] + it.x * matrixValues[Matrix.MSCALE_X],
-                matrixValues[Matrix.MTRANS_Y] + it.y * matrixValues[Matrix.MSCALE_Y],
+                dst[0],
+                dst[1],
+                20F, paint_r
+            )
+
+
+            canvas.drawCircle(
+                it.x * tmp_matrix[Matrix.MSCALE_X],
+                it.y * tmp_matrix[Matrix.MSCALE_Y],
                 40F, paint_g
             )
         }
