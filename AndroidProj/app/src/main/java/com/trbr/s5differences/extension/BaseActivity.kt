@@ -8,12 +8,12 @@ import android.view.View
 import android.view.WindowManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import com.trbr.s5differences.S5Application
+import com.trbr.s5differences.App
 
 open class BaseActivity : AppCompatActivity() {
 
     init {
-        S5Application.activity = this
+        App.activity = this
     }
 
     override fun setContentView(@LayoutRes layoutResID: Int) {
@@ -58,18 +58,18 @@ open class BaseActivity : AppCompatActivity() {
 //        toolbar?.setNavigationOnClickListener { onBackPressed() }
 
 //        if (layoutResID != R.layout.activity_splash) {
-//            if (!S5Application.data.privacy) DlgPrivacy(this)
+//            if (!App.data.privacy) DlgPrivacy(this)
 //        }
     }
 
     override fun onResume() {
         super.onResume()
-        S5Application.activity = this
+        App.activity = this
     }
 
     override fun onDestroy() {
-        if (S5Application.activity == this) {
-            S5Application.activity = null
+        if (App.activity == this) {
+            App.activity = null
         }
         super.onDestroy()
     }

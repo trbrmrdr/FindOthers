@@ -13,5 +13,6 @@
     <color name="gold_2">#F8D74A</color>
     <color name="accent">#CC6B2A</color>
     <color name="green">#44BC40</color>
+    <color name="block_screen">#2170B1</color>
     <color name="serface_color">#92DEE8</color>
 </resources>

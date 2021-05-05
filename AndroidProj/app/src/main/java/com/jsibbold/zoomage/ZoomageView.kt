@@ -21,6 +21,7 @@ package com.jsibbold.zoomage
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.animation.ValueAnimator.AnimatorUpdateListener
+import android.animation.ValueAnimator.REVERSE
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
@@ -31,10 +32,17 @@ import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.ScaleGestureDetector.OnScaleGestureListener
+import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.ScaleGestureDetectorCompat
+import com.trbr.s5differences.App
+import com.trbr.s5differences.Data.Level
+import com.trbr.s5differences.Helper.LogUtils
 import com.trbr.s5differences.R
-import kotlinx.android.synthetic.main.activity_main.view.*
+import om.trbr.s5differences.EventManager
+import om.trbr.s5differences.EventName
+import kotlin.math.roundToInt
+
 
 /**
  * ZoomageView is a pinch-to-zoom extension of [ImageView], providing a smooth
@@ -331,8 +339,11 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
      */
     private fun updateBounds(values: FloatArray) {
         if (drawable != null) {
-            bounds[values[Matrix.MTRANS_X], values[Matrix.MTRANS_Y], drawable.intrinsicWidth * values[Matrix.MSCALE_X] + values[Matrix.MTRANS_X]] =
-                drawable.intrinsicHeight * values[Matrix.MSCALE_Y] + values[Matrix.MTRANS_Y]
+            bounds[
+                    values[Matrix.MTRANS_X],
+                    values[Matrix.MTRANS_Y],
+                    drawable.intrinsicWidth * values[Matrix.MSCALE_X] + values[Matrix.MTRANS_X]
+            ] = drawable.intrinsicHeight * values[Matrix.MSCALE_Y] + values[Matrix.MTRANS_Y]
         }
     }
 
@@ -364,68 +375,74 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
     }
 
 
-    var mPoints = arrayListOf<PointF>()
-    var paint_r = Paint().apply {
-        color = Color.RED
-        strokeWidth = 3F
-        style = Paint.Style.STROKE
-    }
-    var paint_g = Paint().apply {
-        color = Color.GREEN
-        strokeWidth = 3F
-        style = Paint.Style.STROKE
+    var mTouch = mutableListOf<DPoint>()
+
+    override fun invalidate() {
+        if (onStop) return
+        super.invalidate()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
+//        if (onStop) return
+
+        LogUtils.i("onDraw Zoom")
         super.onDraw(canvas)
-        canvas ?: return
-        startValues ?: return
 
-        matrix_tmp.set(imageMatrix)
-        matrix_tmp.getValues(matrixValues)
-
-        mPoints.forEach {
-
-            val dst = floatArrayOf(it.x, it.y)
-//            val inverseMatrix = Matrix()
-//            imageMatrix.invert(inverseMatrix)
-//            startValues
-            imageMatrix.mapPoints(dst)
-
-//            width
-//            drawable.intrinsicWidth
-            canvas.drawCircle(
-                dst[0],
-                dst[1],
-                40F, paint_r
-            )
-
-            val tmp_matrix = FloatArray(9)
-            startValues!!.forEachIndexed { index, fl ->
-                tmp_matrix[index] = fl - matrixValues[index]
-            }
-
-
-            Matrix().apply {
-                setValues(tmp_matrix)
-            }.mapPoints(dst)
-
-            canvas.drawCircle(
-                dst[0],
-                dst[1],
-                20F, paint_r
-            )
-
-
-            canvas.drawCircle(
-                it.x * tmp_matrix[Matrix.MSCALE_X],
-                it.y * tmp_matrix[Matrix.MSCALE_Y],
-                40F, paint_g
+        canvas.setMatrix(imageMatrix)
+        paint_dif?.apply {
+            canvas.drawBitmap(
+                App.data.getImg(Level.LevelsData.Type.DIff)!!,
+                0F, 0F, paint_dif
             )
         }
+
+        mTouch.forEach {
+            it.draw(canvas)
+        }
+
+        mTouch = (mTouch.filter { false == it.has_removed }).toMutableList()
+
+        canvas.setMatrix(Matrix())
+    }
+
+
+    fun hint_active() {
+        paint_dif ?: return
+        val animator = ValueAnimator.ofInt(0, 255)
+        animator.addUpdateListener(object : AnimatorUpdateListener {
+            override fun onAnimationUpdate(animation: ValueAnimator) {
+                val anim_val = animation.animatedValue as Int
+                paint_dif!!.alpha = anim_val
+                invalidate()
+            }
+        })
+        animator.addListener(object : Animator.AnimatorListener {
+
+            override fun onAnimationRepeat(animation: Animator?) {
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                paint_dif!!.alpha = 255
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+        })
+        animator.apply {
+            repeatCount = 2
+            repeatMode = REVERSE
+            duration = 800
+        }
+        animator.start()
+
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (onStop) return false
 
         miroring?.first_touch(event)
 
@@ -485,6 +502,7 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
                             matrixValues[Matrix.MSCALE_X] / startValues!![Matrix.MSCALE_X]
                     }
                     imageMatrix = matrix_tmp
+//                    LogUtils.i("zoom ${Arrays.toString(matrix_tmp.values())}")
                     miroring?.update(matrix_tmp)
                     last[focusx] = focusy
                 }
@@ -495,8 +513,22 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
                     resetImage()
                 }
             } else if (singleTapDetected) {
-                mPoints.add(PointF(event.x, event.y))
-                invalidate()
+                val pos_event = floatArrayOf(event.x, event.y)
+                Matrix().apply { imageMatrix.invert(this) }.mapPoints(pos_event)
+//                LogUtils.i("${pos_event[0]}:${pos_event[1]}")
+
+                val point_f = PointF(pos_event[0], pos_event[1])
+
+
+                var skip = test_intersect(point_f)
+                if (!skip) skip = miroring!!.test_intersect(point_f)
+
+                if (!skip) {
+                    val touch = DPoint(point_f)
+                    touch.animate(this)
+                    mTouch.add(touch)
+                    invalidate()
+                }
             }
             parent.requestDisallowInterceptTouchEvent(disallowParentTouch(event))
 
@@ -505,6 +537,24 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
             return true
         }
         return super.onTouchEvent(event)
+    }
+
+    private fun test_intersect(point_f: PointF): Boolean {
+        var skip = false
+        mTouch.forEach { touch ->
+            if (!touch.success) return@forEach
+
+            val dist = Math.sqrt(
+                Math.pow((touch.point.x - point_f.x).toDouble(), 2.0) +
+                        Math.pow((touch.point.y - point_f.y).toDouble(), 2.0)
+            )
+
+//                    LogUtils.i("dist ${dist}")
+            if (dist <= touch.radius * 2) {
+                skip = true
+            }
+        }
+        return skip
     }
 
     protected fun disallowParentTouch(event: MotionEvent?): Boolean {
@@ -656,6 +706,7 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
         val values = FloatArray(9)
         miror_matrix.getValues(values)
         updateBounds(values)
+        invalidate()
     }
 
     private fun animateTranslationX() {
@@ -883,6 +934,28 @@ class ZoomageView : AppCompatImageView, OnScaleGestureListener {
     fun setMiror(img: ZoomageView) {
         miroring = img
     }
+
+    fun clearPoint() {
+        mTouch.clear()
+        invalidate()
+    }
+
+    var has_anim: Boolean = false
+    var paint_dif: Paint? = null
+    fun setAnimated(enabled: Boolean) {
+        has_anim = enabled
+        if (has_anim) {
+            paint_dif = Paint().apply {
+                alpha = 255
+                style = Paint.Style.FILL
+
+            }
+        } else {
+            paint_dif = null
+        }
+    }
+
+    var onStop = false
 
     private open inner class SimpleAnimatorListener :
         Animator.AnimatorListener {

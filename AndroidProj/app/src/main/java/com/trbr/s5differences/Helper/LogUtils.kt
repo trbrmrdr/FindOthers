@@ -17,7 +17,7 @@ object LogUtils {
         return "================${"$methodName($className:$lineNumber)"}================:$msg"
     }
 
-    private const val isDebuggable = false
+    private const val isDebuggable = true
 //    private const val isDebuggable = true
 
     fun d(msg: String) {

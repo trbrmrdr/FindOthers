@@ -10,7 +10,9 @@ interface EMListener {
 const val profits_delay_limit = 10 * 60 * 1000L
 
 enum class EventName {
-    CHANGE_LOCATION,//обновилась локация
+    FIND_DIFFERENCES,
+    FIND_DIFFERENCES_pre,
+    FIND_ERR
 }
 
 object EventManager {

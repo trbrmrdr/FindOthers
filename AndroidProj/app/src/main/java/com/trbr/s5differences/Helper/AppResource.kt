@@ -90,7 +90,7 @@ open class AppResource(val context: Context) {
     }
 
     // ###########################################################################
-    private val NAME_DB = "waadsu_0.2"
+    private val NAME_DB = "s5_1.0"
 
     //return mContext.getSharedPreferences(NAME_DB, Context.MODE_PRIVATE);
     private val sharedPreferences: SharedPreferences
@@ -345,10 +345,10 @@ open class AppResource(val context: Context) {
        }*/
 
 
-    val cachePwd: File
+    val cachePwd: File=File("")
 
     init {
-        cachePwd = iniFileDir(context, "cache")
+//        cachePwd = iniFileDir(context, "cache")
     }
 
     private fun iniFileDir(context: Context, dir_name: String): File {

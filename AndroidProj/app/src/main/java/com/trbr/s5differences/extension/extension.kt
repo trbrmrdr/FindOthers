@@ -1,6 +1,12 @@
 package om.trbr.s5differences
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.os.Build
+import android.renderscript.Allocation
+import android.renderscript.Element
+import android.renderscript.RenderScript
+import android.renderscript.ScriptIntrinsicBlur
 import java.io.File
 import java.util.concurrent.TimeUnit
 
@@ -39,3 +45,24 @@ infix fun Int.f(fmt: String) = "%$fmt".format(this)
 infix fun Int.f(fmt: Int) = "%${if (fmt < 1) fmt + 1 else fmt}s".format(this)
 
 //infix fun List<Any>.init(that : Any) = {mutableListOf(that) }
+
+// extension function to blur a bitmap
+fun Bitmap.blur(context: Context, radius:Float = 10F):Bitmap?{
+    val bitmap = copy(config,true)
+
+    RenderScript.create(context).apply {
+        val input = Allocation.createFromBitmap(this,this@blur)
+        val output = Allocation.createFromBitmap(this,this@blur)
+
+        ScriptIntrinsicBlur.create(this, Element.U8_4(this)).apply {
+            setInput(input)
+            // Set the radius of the Blur. Supported range 0 < radius <= 25
+            setRadius(radius)
+            forEach(output)
+
+            output.copyTo(bitmap)
+            destroy()
+        }
+    }
+    return bitmap
+}

@@ -38,7 +38,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.trbr.s5differences.BuildConfig
 import com.trbr.s5differences.R
-import com.trbr.s5differences.S5Application
+import com.trbr.s5differences.App
 import java.io.File
 import java.io.IOException
 import java.text.DateFormat
@@ -54,7 +54,7 @@ object HelperUtils {
             try {
 //                view.setImageBitmap(BitmapFactory.decodeFile(path))
 //                view.setImageBitmap(getImage(path, width, height))
-                Glide.with(S5Application.application)
+                Glide.with(App.application)
                         .load(File(path))
                         .apply(RequestOptions().apply {
                             diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -294,7 +294,7 @@ object HelperUtils {
     fun AnimView(view: View, show: Boolean,
                  @AnimRes id_show: Int = R.anim.top_sheet_slide_in,
                  @AnimRes id_hide: Int = R.anim.top_sheet_slide_out,
-                 context: Context = S5Application.application,
+                 context: Context = App.application,
                  check_visible: Boolean = false
     ) {
         var anim: Animation? = null

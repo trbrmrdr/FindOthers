@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--    <files-path name="my_images" path="images/"/>-->
+
+    <!--    <external-files-path-->
+    <!--        name="external_files"-->
+    <!--        path="/Android/data/waadsu.com/files/template/" />-->
+
+
+<!--    <external-files-path-->
+<!--        name="my_images"-->
+<!--        path="Android/data/waadsu.com/files/Pictures" />-->
+
+    <external-cache-path
+        name="external_files"
+        path="." />
+    <external-path
+        name="external_files"
+        path="." />
+    <files-path
+        name="files"
+        path="." />
+</paths>

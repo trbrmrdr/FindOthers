@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_constrain_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/playing_gradient">
@@ -32,28 +33,29 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp"
         app:layout_constraintVertical_bias="0.045">
 
 
         <ImageButton
             android:layout_width="@dimen/star_radius_2"
             android:layout_height="@dimen/star_radius_2"
-            android:background="@drawable/star" />
+            android:background="@drawable/star_gray" />
 
         <ImageButton
             android:layout_width="@dimen/star_radius_2"
             android:layout_height="@dimen/star_radius_2"
-            android:background="@drawable/star" />
+            android:background="@drawable/star_gray" />
 
         <ImageButton
             android:layout_width="@dimen/star_radius_2"
             android:layout_height="@dimen/star_radius_2"
-            android:background="@drawable/star" />
+            android:background="@drawable/star_gray" />
 
         <ImageButton
             android:layout_width="@dimen/star_radius_2"
             android:layout_height="@dimen/star_radius_2"
-            android:background="@drawable/star" />
+            android:background="@drawable/star_gray" />
 
         <ImageButton
             android:layout_width="@dimen/star_radius_2"
@@ -67,7 +69,7 @@
         android:layout_height="@dimen/bottom_btn_size"
         android:background="@drawable/back_button"
         android:onClick="Back"
-        android:visibility="gone"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
@@ -79,11 +81,12 @@
         android:id="@+id/setting_btn"
         android:layout_width="@dimen/bottom_btn_size"
         android:layout_height="@dimen/bottom_btn_size"
+        android:alpha="0.5"
+        android:visibility="gone"
         android:background="@drawable/circle_btn"
         android:onClick="GoSetting"
         android:scaleType="fitXY"
         android:src="@drawable/icon_gear"
-        android:alpha="0.5"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,5 +150,19 @@
             layout="@layout/main_card" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/block_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/block_timer"
+            style="@style/Block_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.trbr.s5differences.Activitys
+package com.trbr.s5differences.Activities
 
 import android.content.Intent
 import android.os.Bundle

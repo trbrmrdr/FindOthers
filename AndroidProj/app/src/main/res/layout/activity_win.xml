@@ -55,6 +55,7 @@
                 android:layout_margin="@dimen/win_card_inner">
 
                 <ImageView
+                    android:id="@+id/win_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_centerHorizontal="true"
@@ -73,7 +74,7 @@
         android:tint="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/btn_play"
         app:layout_constraintEnd_toEndOf="parent"
-
+        android:onClick="Share"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
@@ -83,6 +84,7 @@
         android:id="@+id/btn_like"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:onClick="GoodLevel"
         android:background="@drawable/thumbsup"
         app:layout_constraintBottom_toTopOf="@+id/btn_play"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +97,7 @@
         android:id="@+id/btn_dis"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:onClick="BadLevel"
         android:background="@drawable/thumbsdown"
         app:layout_constraintBottom_toTopOf="@+id/btn_play"
         app:layout_constraintEnd_toEndOf="parent"
