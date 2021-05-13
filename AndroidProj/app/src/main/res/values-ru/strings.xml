@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="msg_permission">Вы не подтвердили разрешение.\nПриложение несможет полностью функционировать.\nРазрешение необходимо для %s.</string>
+    <string name="msg_permission2">Вы не подтвердили разрешение. Пожалуйста откройте настроки и включите их, иначе приложение не сможет работать. Разрешение необходимо для %s.</string>
+    <string name="permission_yes">Разрешить</string>
+    <string name="permission_no">Отклонить</string>
+
+    <string name="ethernet_permission">скачивания новых уровней</string>
+</resources>

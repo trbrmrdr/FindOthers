@@ -3,7 +3,11 @@ package com.trbr.s5differences
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import android.os.Build
+import android.webkit.WebView
+import androidx.appcompat.app.AppCompatDelegate
 import com.trbr.s5differences.Ads.AdsManager
+//import com.trbr.s5differences.Ads.AdsManager
 import com.trbr.s5differences.Data.Level
 import com.trbr.s5differences.Helper.LogUtils
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +22,7 @@ import om.trbr.s5differences.EventManager
 //при чтении Preferences падает из за нетого контекста
 
 //Даже унаследование в java непомогает
-open class App : Application() {
+class App : Application() {
 
     init {
 //        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
@@ -29,18 +33,25 @@ open class App : Application() {
 
     companion object {
 
-        var job: Job? = null
+        //        var job: Job? = null
         val scope_ui = CoroutineScope(Dispatchers.Main)
 
         @JvmStatic
         fun init(app: Application) {
             application = app
-            scope_ui.launch {
-                Analytics.onLike(4, true)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                if (application.packageName != Application.getProcessName()) {
+                    WebView.setDataDirectorySuffix(Application.getProcessName())
+                }
             }
-//            AdsManager
             data = Level(application)
             data.load()
+
+            Analytics.init(application)
+            scope_ui.launch {
+                AdsManager
+            }
         }
 
         lateinit var application: Application

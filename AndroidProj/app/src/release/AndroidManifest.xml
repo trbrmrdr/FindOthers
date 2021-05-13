@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.trbr.s5differences">
+    package="free.puzzle.game.spot.the.difference">
 
     <application
-        android:name=".AppJava"
+        android:name="com.trbr.s5differences.AppJava"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -15,21 +15,21 @@
 
 
         <activity
-            android:name=".Activities.SettingsActivity"
+            android:name="com.trbr.s5differences.Activities.SettingsActivity"
             android:label="@string/title_activity_settings" />
 
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name="com.trbr.s5differences.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.WinActivity">
+        <activity android:name="com.trbr.s5differences.Activities.WinActivity">
 
         </activity>
 
-        <activity android:name=".Activities.PlayingActivity"></activity>
+        <activity android:name="com.trbr.s5differences.Activities.PlayingActivity"></activity>
     </application>
 
 </manifest>

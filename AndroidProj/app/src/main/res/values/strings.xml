@@ -20,10 +20,18 @@
     <string name="next">Next</string>
     <string name="perfect">Perfect!</string>
 
-    <string name="facebook_app_id">1090299141462109</string>
-<!--    <string name="admob_pub_key">ca-app-pub-7858972826338970~5176183099</string> мой -->
-    <string name="admob_pub_key">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="msg_permission">You have not confirmed your permission.  The application will not be able to function fully.  Permission is required for</string>
+    <string name="msg_permission2">You have not confirmed your permission.  The application will not be able to function fully, otherwise the application will not work..  Permission is required for %s.</string>
+    <string name="permission_yes">Permit</string>
+    <string name="permission_no">Dismiss</string>
+
+    <string name="facebook_app_id" translatable="false">1090299141462109</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb1090299141462109</string>
+
+    <!--    <string name="admob_pub_key">ca-app-pub-7858972826338970~5176183099</string> мой -->
+    <string name="admob_pub_key" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
 
 
-    <string name="appmetrica_pub_key">da00c1f4-2461-4cb8-a349-134193a77ccb</string>
+    <string name="appmetrica_pub_key" translatable="false">da00c1f4-2461-4cb8-a349-134193a77ccb</string>
+    <string name="ethernet_permission">скачивания новых уровней</string>
 </resources>

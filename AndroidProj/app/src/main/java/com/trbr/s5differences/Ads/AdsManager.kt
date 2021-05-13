@@ -282,8 +282,8 @@ object AdsManager {
 
     init {
         FacebookAds.apply { load() }
-        Applovin
-        Admob.apply { load() }
+//        Applovin
+//        Admob.apply { load() }
     }
 
 

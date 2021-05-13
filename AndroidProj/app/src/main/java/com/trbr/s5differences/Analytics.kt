@@ -1,13 +1,18 @@
 package com.trbr.s5differences
 
+import android.app.Application
 import android.os.Bundle
 import com.facebook.FacebookSdk
 import com.facebook.LoggingBehavior
 import com.facebook.appevents.AppEventsConstants
 import com.facebook.appevents.AppEventsLogger
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.trbr.s5differences.Helper.LogUtils
 import com.yandex.metrica.YandexMetrica
 import com.yandex.metrica.YandexMetricaConfig
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -47,10 +52,15 @@ enum class EventsName(val event: String) {
 
 object Analytics {
 
-    val firebaseAnalytics: FirebaseAnalytics
-    val fb_logger: AppEventsLogger
+    var firebaseAnalytics: FirebaseAnalytics? = null
+    var fb_logger: AppEventsLogger? = null
 
-    init {
+    val scope_ui = CoroutineScope(Dispatchers.Main)
+    fun init(application: Application) {
+        LogUtils.i("--init")
+
+        firebaseAnalytics = FirebaseAnalytics.getInstance(application)
+
         //Yandex
         val config =
             YandexMetricaConfig.newConfigBuilder(App.application.getString(R.string.appmetrica_pub_key))
@@ -59,21 +69,22 @@ object Analytics {
         YandexMetrica.enableActivityAutoTracking(App.application)
 
 
-        //Facebook
-//        AppEventsLogger.activateApp(App.application)
-        fb_logger = AppEventsLogger.newLogger(App.application)
-       /* if (BuildConfig.DEBUG) {
-//            FacebookSdk.setAutoLogAppEventsEnabled(false)
+//Facebook
+        if (BuildConfig.DEBUG) {
+//             FacebookSdk.setAutoLogAppEventsEnabled(false)
             FacebookSdk.setIsDebugEnabled(true)
             FacebookSdk.addLoggingBehavior(LoggingBehavior.APP_EVENTS)
-        }*/
+        }
+        FacebookSdk.setAutoInitEnabled(true)
+        FacebookSdk.sdkInitialize(application)
+        AppEventsLogger.activateApp(application)
+        fb_logger = AppEventsLogger.newLogger(application)
 
-        firebaseAnalytics = FirebaseAnalytics.getInstance(App.application)
 
     }
 
 
-    fun log(event_name: String, params: Map<String, Any> = mapOf()) {
+    fun log(event_name: String, params: Map<String, Any> = mapOf()) = scope_ui.launch {
         // без необходимости не забиваем аналитику
 //        if (BuildConfig.DEBUG) return
 
@@ -84,9 +95,9 @@ object Analytics {
             bandle_params.putString(param.key, param.value.toString())
         }
 
-        firebaseAnalytics.logEvent(event_name, bandle_params)
+        firebaseAnalytics?.logEvent(event_name, bandle_params)
 
-        fb_logger.logEvent(event_name, bandle_params)
+        fb_logger?.logEvent(event_name, bandle_params)
     }
 
 
@@ -178,7 +189,7 @@ object Analytics {
 
         // Специальный эвент для FB
         if (level == 0) {
-            fb_logger.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_TUTORIAL)
+            fb_logger?.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_TUTORIAL)
         }
     }
 

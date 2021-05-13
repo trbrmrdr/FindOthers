@@ -70,6 +70,17 @@ android {
             }
         }
     }
+
+    sourceSets {
+        main {
+//            jniLibs.srcDirs = ['libs']
+
+//            kotlin {
+//                exclude '**/Ads/*.kt'
+//            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -110,20 +121,18 @@ dependencies {
 
 
     // Import the Firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:28.0.0')
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
 
     // Add the dependency for the Firebase SDK for Google Analytics
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
-    // Add the dependencies for any other desired Firebase products
-    // https://firebase.google.com/docs/android/setup#available-libraries
-    implementation 'com.google.android.gms:play-services-ads'
+//    implementation 'com.google.firebase:firebase-crashlytics'
+//    implementation 'com.google.firebase:firebase-analytics'
 
-    implementation 'com.google.ads.mediation:applovin:10.0.1.0'
-    implementation 'com.google.ads.mediation:facebook:6.4.0.0'
-
+//    implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
+//    implementation 'com.google.firebase:firebase-crashlytics-ktx:17.2.2'
 
     // Facebook Core only (Analytics)
     implementation 'com.facebook.android:facebook-core:8.1.0'
@@ -132,4 +141,11 @@ dependencies {
 
     implementation 'com.yandex.android:mobmetricalib:3.20.1'
 
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+    implementation 'com.google.android.gms:play-services-ads'
+
+    implementation 'com.google.ads.mediation:applovin:10.0.1.0'
+    implementation 'com.google.ads.mediation:facebook:6.4.0.0'
 }
