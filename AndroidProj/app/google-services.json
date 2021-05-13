@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "36969515687",
+    "project_id": "s5-differences",
+    "storage_bucket": "s5-differences.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36969515687:android:8d7b1e50fbe84fc3156982",
+        "android_client_info": {
+          "package_name": "com.trbr.s5differences"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36969515687-nrp7v3isg3g611turtlnrkqpr9jd7437.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8x8y5jIZsxFDW4oJzsvFLkkTCCdkyhvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36969515687-nrp7v3isg3g611turtlnrkqpr9jd7437.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

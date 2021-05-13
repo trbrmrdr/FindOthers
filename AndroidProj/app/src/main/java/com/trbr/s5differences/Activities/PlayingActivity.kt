@@ -119,7 +119,7 @@ class PlayingActivity : BaseActivity(), View.OnClickListener, EMListener {
                 }
                 EventName.FIND_ERR -> {
                     err_click += 1
-                    if (err_click >= 4) {
+                    if (err_click >= 3) {
                         err_click = 0
                         LimitTouch()
                     }

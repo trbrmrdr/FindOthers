@@ -19,4 +19,11 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="next">Next</string>
     <string name="perfect">Perfect!</string>
+
+    <string name="facebook_app_id">1090299141462109</string>
+<!--    <string name="admob_pub_key">ca-app-pub-7858972826338970~5176183099</string> мой -->
+    <string name="admob_pub_key">ca-app-pub-3940256099942544~3347511713</string>
+
+
+    <string name="appmetrica_pub_key">da00c1f4-2461-4cb8-a349-134193a77ccb</string>
 </resources>

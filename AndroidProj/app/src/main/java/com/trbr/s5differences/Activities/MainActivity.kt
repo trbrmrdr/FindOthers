@@ -14,6 +14,7 @@ import com.trbr.s5differences.R
 import com.trbr.s5differences.extension.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_win.*
+import kotlinx.android.synthetic.main.coin_btn.*
 import kotlinx.coroutines.*
 import kotlin.math.roundToInt
 

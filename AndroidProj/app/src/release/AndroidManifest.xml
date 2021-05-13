@@ -3,7 +3,7 @@
     package="com.trbr.s5differences">
 
     <application
-        android:name=".App2"
+        android:name=".AppJava"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"

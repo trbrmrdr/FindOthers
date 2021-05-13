@@ -54,7 +54,7 @@ object EventManager {
     fun registerEvent(name: EventName, listener: EMListener) {
         synchronized(registered) {
             registered[name]?.add(listener)
-                    ?: registered.put(name, mutableListOf(listener))
+                ?: registered.put(name, mutableListOf(listener))
         }
     }
 
@@ -62,7 +62,7 @@ object EventManager {
         synchronized(registered) {
             names.forEach { name ->
                 registered[name]?.add(listener)
-                        ?: registered.put(name, mutableListOf(listener))
+                    ?: registered.put(name, mutableListOf(listener))
             }
         }
     }
@@ -82,7 +82,7 @@ object EventManager {
     fun sendEvent(name: EventName, data: Any? = null) {
         synchronized(events) {
             events.get(name)?.add(data)
-                    ?: events.put(name, mutableListOf(data))
+                ?: events.put(name, mutableListOf(data))
         }
     }
 }

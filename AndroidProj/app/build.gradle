@@ -1,29 +1,45 @@
+/*
 plugins {
-    id 'com.android.application'
     id 'kotlin-android'
-
-
-//    apply plugin: 'com.google.gms.google-services'
 //    apply plugin: 'com.google.firebase.crashlytics'
     id 'kotlin-android-extensions'
 }
+*/
 
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.firebase.crashlytics'
 android {
     signingConfigs {
+//        keytool -genkey -v -keystore key.jks -alias name-alias -keyalg RSA -keysize 2048 -validity 10000
+//        keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+//        keytool -list -v -keystore {keystore_name} -alias {alias_name}
+
+
+//        keytool -list -v -keystore .android/debug.keystore -alias androiddebugkey -storepass android -keypass android | openssl sha1 -binary | openssl base64
+//        keytool -list -v -keystore key.jks -alias key-alias -storepass 230490S5Differences -keypass Password | openssl sha1 -binary | openssl base64
         release {
             storeFile file('./../../key.jks')
-            storePassword '230490'
-            keyAlias = 'key0'
-            keyPassword '230490'
+            storePassword '230490S5Differences'
+            keyAlias = 'key-alias'
+            keyPassword 'Password'
+//            63:F6:EE:56:EF:32:01:6B:73:3F:B2:9A:D0:1B:7E:05:5C:68:BE:A6:BC:46:5A:46:30:37:9F:28:61:38:76:AE
+//            oa0kG1vsfHsLOFZ4sTsmpLTf+k0=
         }
+//        debug{
+//            E5:2F:8A:59:03:68:6B:FC:F5:3E:D0:52:56:9F:E2:5D:3A:1C:D0:A7:B3:5D:F9:2D:BF:A0:6D:58:F9:D5:26:43
+        //            T0vATnaS+2vjWpVwpsN6S9yDQMA=
+//        }
     }
 
     compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+//    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.trbr.s5differences"
-        minSdkVersion 21
+        minSdkVersion 20
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -34,7 +50,7 @@ android {
         def formattedDate = new Date().format('dd.MM.yy~HH-mm')
         archivesBaseName = "$applicationId-v$versionCode($versionName) - $formattedDate"
 
-//        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
@@ -92,7 +108,28 @@ dependencies {
     implementation "com.github.bumptech.glide:okhttp3-integration:4.5.0"
     implementation 'androidx.preference:preference:1.1.1'
 
-//    implementation 'de.hdodenhof:circleimageview'
 
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:28.0.0')
+
+    // Add the dependency for the Firebase SDK for Google Analytics
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+    implementation 'com.google.android.gms:play-services-ads'
+
+    implementation 'com.google.ads.mediation:applovin:10.0.1.0'
+    implementation 'com.google.ads.mediation:facebook:6.4.0.0'
+
+
+    // Facebook Core only (Analytics)
+    implementation 'com.facebook.android:facebook-core:8.1.0'
+    // Facebook Android SDK (everything)
+    implementation 'com.facebook.android:facebook-android-sdk:8.1.0'
+
+    implementation 'com.yandex.android:mobmetricalib:3.20.1'
 
 }

@@ -20,4 +20,5 @@
     <dimen name="win_card_inner">10dp</dimen>
     <dimen name="main_circle_radius">190dp</dimen>
     <dimen name="main_circle_size">375dp</dimen>
+    <dimen name="main_circle_inner_size">360dp</dimen>
 </resources>

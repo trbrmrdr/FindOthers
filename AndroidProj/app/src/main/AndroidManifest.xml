@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trbr.s5differences">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:name=".App2"
+        android:name=".AppJava"
         android:allowBackup="true"
-        android:fullBackupContent="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
 
@@ -14,22 +16,38 @@
         android:theme="@style/Theme.S5Differences">
 
 
+        <!--<meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="false" />-->
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <!--<meta-data
+            android:name="com.facebook.sdk.AutoInitEnabled"
+            android:value="false" />-->
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_pub_key" />
+
+
         <activity
             android:name=".Activities.SettingsActivity"
             android:label="@string/title_activity_settings" />
 
         <activity android:name=".Activities.MainActivity">
+
+        </activity>
+
+        <activity android:name=".Activities.WinActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.WinActivity">
-
-        </activity>
 
         <activity android:name=".Activities.PlayingActivity"></activity>
-    </application>
 
+    </application>
 </manifest>
